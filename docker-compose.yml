@@ -1,0 +1,22 @@
+services:
+   raketa-bot:
+     build: ./
+     command: ./raketa-bot
+     ports:
+       - 8069:8069
+     depends_on:
+       - db
+     environment:
+       - TELEGRAM_TOKEN=8134503253:AAESOoiQMvvkTv-mzabDy-o_T_uaRl3SFTY
+       - PG_PASS=
+       - ADMIN=
+       - CONFIG_PATH=configs/local.yaml
+   db:
+     restart: always
+     image: postgres:latest
+     volumes:
+       - ./.database/postgres/data:/var/lib/postgresql/data
+     environment:
+       - POSTGRES_PASSWORD=
+     ports:
+       - 5436:5432

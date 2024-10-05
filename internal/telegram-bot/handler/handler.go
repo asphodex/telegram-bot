@@ -18,19 +18,19 @@ func (bot *Bot) handleCommand(update tgbotapi.Update) {
 	msg.ParseMode = "HTML"
 	switch update.Message.Command() {
 		case "start":
-			err := bot.start(&msg, &update)
+			err := bot.startCommand(&msg, &update)
 			if err != nil {
 				bot.log.Error("start error: ", err)
 			}
 			break
 		case "search":
-			err := bot.search(&msg, &update)
+			err := bot.searchCommand(&msg, &update)
 			if err != nil {
 				bot.log.Error("search error: ", err)
 			}
 			break
 		case "statistics":
-			err := bot.statistics(&msg, &update)
+			err := bot.statisticsCommand(&msg, &update)
 			if err != nil {
 				bot.log.Error("statistics error: ", err)
 			}

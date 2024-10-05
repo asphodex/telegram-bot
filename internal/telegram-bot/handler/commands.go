@@ -10,7 +10,7 @@ import (
 	"telegram-bot/internal/pkg/raketa"
 )
 
-func (bot *Bot) start(msg *tgbotapi.MessageConfig, update *tgbotapi.Update) error {
+func (bot *Bot) startCommand(msg *tgbotapi.MessageConfig, update *tgbotapi.Update) error {
 	if err := bot.services.Statistic.AddUser(update.Message.Chat.ID, update.SentFrom().UserName); err != nil {
 		return err
 	}
@@ -19,7 +19,7 @@ func (bot *Bot) start(msg *tgbotapi.MessageConfig, update *tgbotapi.Update) erro
 	return nil
 }
 
-func (bot *Bot) search(msg *tgbotapi.MessageConfig, update *tgbotapi.Update) error {
+func (bot *Bot) searchCommand(msg *tgbotapi.MessageConfig, update *tgbotapi.Update) error {
 	track := strings.TrimSpace(update.Message.CommandArguments())
 	if track == "" {
 		msg.Text = emptyTrackMessage
@@ -47,7 +47,7 @@ func (bot *Bot) search(msg *tgbotapi.MessageConfig, update *tgbotapi.Update) err
 	return nil
 }
 
-func (bot *Bot) statistics(msg *tgbotapi.MessageConfig, update *tgbotapi.Update) error {
+func (bot *Bot) statisticsCommand(msg *tgbotapi.MessageConfig, update *tgbotapi.Update) error {
 	if strconv.FormatInt(update.SentFrom().ID, 10) != os.Getenv("ADMIN") {
 		msg.Text = forbiddenMessage
 		return nil

@@ -21,7 +21,7 @@ func (bot *Bot) startCommand(msg *tgbotapi.MessageConfig, update *tgbotapi.Updat
 
 func (bot *Bot) searchCommand(msg *tgbotapi.MessageConfig, update *tgbotapi.Update) error {
 	track := strings.TrimSpace(update.Message.CommandArguments())
-	if track == "" {
+	if track == "" || strings.Contains(track, " ") {
 		msg.Text = emptyTrackMessage
 		return nil
 	}
